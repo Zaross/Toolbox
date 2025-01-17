@@ -21,7 +21,7 @@ namespace Toolbox
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.SetCompatibleTextRenderingDefault(false);
             ApplicationConfiguration.Initialize();
-            Application.Run(new Form1());
+            Application.Run(new Mainframe());
         }
 
         /// <summary>

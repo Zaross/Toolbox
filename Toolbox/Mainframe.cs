@@ -1,8 +1,11 @@
+using static Toolbox.helper.Converter_hex;
+using static Toolbox.Masks.Scanner_ip;
+
 namespace Toolbox
 {
-    public partial class Form1 : Form
+    public partial class Mainframe : Form
     {
-        public Form1()
+        public Mainframe()
         {
             InitializeComponent();
         }
@@ -25,6 +28,12 @@ namespace Toolbox
         private void guna2HtmlToolTip1_Draw(object sender, DrawToolTipEventArgs e)
         {
 
+        }
+
+        private void Button_Scanner_IP_Click(object sender, EventArgs e)
+        {
+            Masks.Scanner_ip form2 = new Masks.Scanner_ip();
+            form2.Show();
         }
     }
 }
