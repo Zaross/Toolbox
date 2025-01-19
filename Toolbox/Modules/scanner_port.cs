@@ -57,7 +57,6 @@ namespace Toolbox.Modules
                     }
                     else
                     {
-                        // Timeout
                         return false;
                     }
                 }

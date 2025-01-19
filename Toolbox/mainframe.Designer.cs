@@ -122,12 +122,12 @@
             Button_Scanner_IP.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
             Button_Scanner_IP.Font = new Font("Segoe UI", 9F);
             Button_Scanner_IP.ForeColor = Color.White;
-            Button_Scanner_IP.Location = new Point(938, 130);
+            Button_Scanner_IP.Location = new Point(12, 104);
             Button_Scanner_IP.Name = "Button_Scanner_IP";
             Button_Scanner_IP.ShadowDecoration.CustomizableEdges = customizableEdges8;
             Button_Scanner_IP.Size = new Size(180, 45);
             Button_Scanner_IP.TabIndex = 4;
-            Button_Scanner_IP.Text = "guna2Button1";
+            Button_Scanner_IP.Text = "IP-Scanner";
             Button_Scanner_IP.Click += Button_Scanner_IP_Click;
             // 
             // Mainframe

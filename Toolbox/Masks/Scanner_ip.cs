@@ -16,5 +16,15 @@ namespace Toolbox.Masks
         {
             InitializeComponent();
         }
+
+        private void Image_Button_Scanner_IP_Back_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void Button_Start_IP_Scan_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

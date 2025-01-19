@@ -32,8 +32,8 @@ namespace Toolbox
 
         private void Button_Scanner_IP_Click(object sender, EventArgs e)
         {
-            Masks.Scanner_ip form2 = new Masks.Scanner_ip();
-            form2.Show();
+            Masks.Scanner_ip Scanner_IP_Mask = new Masks.Scanner_ip();
+            Scanner_IP_Mask.Show();
         }
     }
 }
