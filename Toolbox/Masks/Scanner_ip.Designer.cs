@@ -36,6 +36,7 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Scanner_ip));
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -56,7 +57,7 @@
             Button_Minimize = new Guna.UI2.WinForms.Guna2ControlBox();
             Button_Close = new Guna.UI2.WinForms.Guna2ControlBox();
             guna2AnimateWindow1 = new Guna.UI2.WinForms.Guna2AnimateWindow(components);
-            guna2TextBox1 = new Guna.UI2.WinForms.Guna2TextBox();
+            IPBox = new Guna.UI2.WinForms.Guna2TextBox();
             Button_Start_IP_Scan = new Guna.UI2.WinForms.Guna2Button();
             guna2DataGridView1 = new Guna.UI2.WinForms.Guna2DataGridView();
             Status = new DataGridViewTextBoxColumn();
@@ -66,7 +67,6 @@
             Hersteller = new DataGridViewTextBoxColumn();
             MAC = new DataGridViewTextBoxColumn();
             Benutzer = new DataGridViewTextBoxColumn();
-            Datum = new DataGridViewTextBoxColumn();
             Panel_Top = new Guna.UI2.WinForms.Guna2Panel();
             Panel_Top.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)guna2DataGridView1).BeginInit();
@@ -117,14 +117,14 @@
             // 
             Scanner_IP_Back.CheckedState.ImageSize = new Size(64, 64);
             Scanner_IP_Back.HoverState.ImageSize = new Size(64, 64);
-            Scanner_IP_Back.Image = Properties.Resources.back;
+            Scanner_IP_Back.Image = (Image)resources.GetObject("Scanner_IP_Back.Image");
             Scanner_IP_Back.ImageOffset = new Point(0, 0);
             Scanner_IP_Back.ImageRotate = 0F;
-            Scanner_IP_Back.Location = new Point(10, 0);
+            Scanner_IP_Back.Location = new Point(0, 4);
             Scanner_IP_Back.Name = "Scanner_IP_Back";
             Scanner_IP_Back.PressedState.ImageSize = new Size(64, 64);
             Scanner_IP_Back.ShadowDecoration.CustomizableEdges = customizableEdges5;
-            Scanner_IP_Back.Size = new Size(52, 45);
+            Scanner_IP_Back.Size = new Size(88, 38);
             Scanner_IP_Back.TabIndex = 0;
             Scanner_IP_Back.Click += Image_Button_Scanner_IP_Back_Click;
             // 
@@ -164,27 +164,28 @@
             Button_Close.Size = new Size(45, 29);
             Button_Close.TabIndex = 0;
             // 
-            // guna2TextBox1
+            // IPBox
             // 
-            guna2TextBox1.BorderColor = Color.Transparent;
-            guna2TextBox1.CustomizableEdges = customizableEdges12;
-            guna2TextBox1.DefaultText = "";
-            guna2TextBox1.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
-            guna2TextBox1.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
-            guna2TextBox1.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
-            guna2TextBox1.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
-            guna2TextBox1.FillColor = Color.Gray;
-            guna2TextBox1.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox1.Font = new Font("Segoe UI", 9F);
-            guna2TextBox1.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox1.Location = new Point(12, 70);
-            guna2TextBox1.Name = "guna2TextBox1";
-            guna2TextBox1.PasswordChar = '\0';
-            guna2TextBox1.PlaceholderText = "";
-            guna2TextBox1.SelectedText = "";
-            guna2TextBox1.ShadowDecoration.CustomizableEdges = customizableEdges13;
-            guna2TextBox1.Size = new Size(995, 25);
-            guna2TextBox1.TabIndex = 5;
+            IPBox.BorderColor = Color.Transparent;
+            IPBox.CustomizableEdges = customizableEdges12;
+            IPBox.DefaultText = "";
+            IPBox.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
+            IPBox.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
+            IPBox.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
+            IPBox.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
+            IPBox.FillColor = Color.Gray;
+            IPBox.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            IPBox.FocusedState.ForeColor = Color.White;
+            IPBox.Font = new Font("Segoe UI", 9F);
+            IPBox.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
+            IPBox.Location = new Point(12, 70);
+            IPBox.Name = "IPBox";
+            IPBox.PasswordChar = '\0';
+            IPBox.PlaceholderText = "";
+            IPBox.SelectedText = "";
+            IPBox.ShadowDecoration.CustomizableEdges = customizableEdges13;
+            IPBox.Size = new Size(995, 25);
+            IPBox.TabIndex = 5;
             // 
             // Button_Start_IP_Scan
             // 
@@ -206,29 +207,29 @@
             // guna2DataGridView1
             // 
             guna2DataGridView1.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = Color.White;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle1.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(231, 229, 255);
-            dataGridViewCellStyle1.SelectionForeColor = Color.FromArgb(71, 69, 94);
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(42, 42, 59);
+            dataGridViewCellStyle1.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.ForeColor = Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(60, 139, 220);
+            dataGridViewCellStyle1.SelectionForeColor = Color.White;
             guna2DataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             guna2DataGridView1.BackgroundColor = Color.FromArgb(25, 25, 25);
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(27, 27, 27);
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(50, 50, 50);
+            dataGridViewCellStyle2.Font = new Font("Roboto", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             dataGridViewCellStyle2.ForeColor = Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(27, 27, 27);
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(60, 139, 220);
+            dataGridViewCellStyle2.SelectionForeColor = Color.White;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
             guna2DataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             guna2DataGridView1.ColumnHeadersHeight = 17;
-            guna2DataGridView1.Columns.AddRange(new DataGridViewColumn[] { Status, Column_Name, IP, NetBIOSGruppe, Hersteller, MAC, Benutzer, Datum });
+            guna2DataGridView1.Columns.AddRange(new DataGridViewColumn[] { Status, Column_Name, IP, NetBIOSGruppe, Hersteller, MAC, Benutzer });
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = Color.FromArgb(85, 85, 85);
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle3.ForeColor = Color.FromArgb(71, 69, 94);
-            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(231, 229, 255);
-            dataGridViewCellStyle3.SelectionForeColor = Color.FromArgb(71, 69, 94);
+            dataGridViewCellStyle3.BackColor = Color.FromArgb(30, 30, 30);
+            dataGridViewCellStyle3.Font = new Font("Roboto", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle3.ForeColor = Color.White;
+            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(60, 139, 220);
+            dataGridViewCellStyle3.SelectionForeColor = Color.White;
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
             guna2DataGridView1.DefaultCellStyle = dataGridViewCellStyle3;
             guna2DataGridView1.GridColor = Color.FromArgb(231, 229, 255);
@@ -303,11 +304,6 @@
             Benutzer.HeaderText = "Benutzer";
             Benutzer.Name = "Benutzer";
             // 
-            // Datum
-            // 
-            Datum.HeaderText = "Datum";
-            Datum.Name = "Datum";
-            // 
             // Scanner_ip
             // 
             AutoScaleDimensions = new SizeF(96F, 96F);
@@ -317,7 +313,7 @@
             ControlBox = false;
             Controls.Add(guna2DataGridView1);
             Controls.Add(Button_Start_IP_Scan);
-            Controls.Add(guna2TextBox1);
+            Controls.Add(IPBox);
             Controls.Add(Panel_Top);
             FormBorderStyle = FormBorderStyle.None;
             MaximizeBox = false;
@@ -342,7 +338,7 @@
         private Guna.UI2.WinForms.Guna2ControlBox Button_Close;
         private Guna.UI2.WinForms.Guna2ControlBox guna2ControlBox1;
         private Guna.UI2.WinForms.Guna2ControlBox guna2ControlBox2;
-        private Guna.UI2.WinForms.Guna2TextBox guna2TextBox1;
+        private Guna.UI2.WinForms.Guna2TextBox IPBox;
         private Guna.UI2.WinForms.Guna2Button Button_Start_IP_Scan;
         private Guna.UI2.WinForms.Guna2DataGridView guna2DataGridView1;
         private DataGridViewTextBoxColumn Status;
@@ -352,6 +348,5 @@
         private DataGridViewTextBoxColumn Hersteller;
         private DataGridViewTextBoxColumn MAC;
         private DataGridViewTextBoxColumn Benutzer;
-        private DataGridViewTextBoxColumn Datum;
     }
 }

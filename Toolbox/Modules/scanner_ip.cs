@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +10,12 @@ namespace Toolbox.Modules
 {
     public class Scanner_ip
     {
+        private DataGridView dataGridView;
+
+        public Scanner_ip(DataGridView dataGridView)
+        {
+            this.dataGridView = dataGridView;
+        }
 
         /// <summary>
         /// Scans a range of IP addresses to find active IPs within the specified range.
@@ -33,6 +40,7 @@ namespace Toolbox.Modules
                         lock (activeIPs)
                         {
                             activeIPs.Add(currentIP);
+                            AddToDataGridView(currentIP);
                         }
                     }
                 }));
@@ -85,6 +93,39 @@ namespace Toolbox.Modules
                 {
                     return false;
                 }
+            }
+        }
+
+        /// <summary>
+        /// Adds the specified IP address to the DataGridView.
+        /// </summary>
+        /// <param name="ip">The IP address to add.</param>
+        private void AddToDataGridView(string ipAddress)
+        {
+            if (dataGridView.InvokeRequired)
+            {
+                dataGridView.Invoke(new Action(() => dataGridView.Rows.Add(new object[] { null, null, ipAddress })));
+            }
+            else
+            {
+                dataGridView.Rows.Add(new object[] { null, null, ipAddress });
+            }
+        }
+        /// <summary>
+        /// Resolves the hostname for a given IP address.
+        /// </summary>
+        /// <param name="ipAddress">The IP address to resolve.</param>
+        /// <returns>A task that represents the asynchronous operation. The task result contains the hostname.</returns>
+        private async Task<string> GetHostNameAsync(string ipAddress)
+        {
+            try
+            {
+                var hostEntry = await Dns.GetHostEntryAsync(ipAddress);
+                return hostEntry.HostName;
+            }
+            catch
+            {
+                return string.Empty;
             }
         }
     }
