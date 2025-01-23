@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Toolbox.Modules
@@ -37,10 +39,13 @@ namespace Toolbox.Modules
                 {
                     if (await PingIPAddressAsync(currentIP))
                     {
+                        string hostName = await GetHostNameAsync(currentIP);
+                        string macAddress = await GetMacAddressAsync(currentIP);
+                        string netbiosGroup = await GetNetbiosGroupAsync(currentIP);
                         lock (activeIPs)
                         {
                             activeIPs.Add(currentIP);
-                            AddToDataGridView(currentIP);
+                            AddToDataGridView(currentIP, hostName, macAddress, netbiosGroup);
                         }
                     }
                 }));
@@ -100,17 +105,18 @@ namespace Toolbox.Modules
         /// Adds the specified IP address to the DataGridView.
         /// </summary>
         /// <param name="ip">The IP address to add.</param>
-        private void AddToDataGridView(string ipAddress)
+        private void AddToDataGridView(string ipAddress, string hostName, string macAddress, string netbiosGroup)
         {
             if (dataGridView.InvokeRequired)
             {
-                dataGridView.Invoke(new Action(() => dataGridView.Rows.Add(new object[] { null, null, ipAddress })));
+                dataGridView.Invoke(new Action(() => dataGridView.Rows.Add(new object[] { "Online", hostName, ipAddress, macAddress, netbiosGroup })));
             }
             else
             {
-                dataGridView.Rows.Add(new object[] { null, null, ipAddress });
+                dataGridView.Rows.Add(new object[] { "Online", hostName, ipAddress, macAddress, netbiosGroup });
             }
         }
+
         /// <summary>
         /// Resolves the hostname for a given IP address.
         /// </summary>
@@ -127,6 +133,86 @@ namespace Toolbox.Modules
             {
                 return string.Empty;
             }
+        }
+
+        /// <summary>
+        /// Retrieves the NETBIOS group of a device given its IP address.
+        /// </summary>
+        /// <param name="ipAddress">The IP address of the device.</param>
+        /// <returns>A task that represents the asynchronous operation. The task result contains the NETBIOS group name.</returns>
+        public async Task<string> GetNetbiosGroupAsync(string ipAddress)
+        {
+            try
+            {
+                var processStartInfo = new ProcessStartInfo
+                {
+                    FileName = "nbtstat",
+                    Arguments = $"-A {ipAddress}",
+                    RedirectStandardOutput = true,
+                    UseShellExecute = false,
+                    CreateNoWindow = true
+                };
+
+                using (var process = Process.Start(processStartInfo))
+                {
+                    if (process != null)
+                    {
+                        string output = await process.StandardOutput.ReadToEndAsync();
+                        process.WaitForExit();
+
+                        var match = Regex.Match(output, @"<GROUP>\s+(\S+)");
+                        if (match.Success)
+                        {
+                            return match.Groups[1].Value;
+                        }
+                    }
+                }
+            }
+            catch
+            {
+                // Handle exceptions if necessary
+            }
+            return string.Empty;
+        }
+
+        /// <summary>
+        /// Retrieves the MAC address of a device given its IP address.
+        /// </summary>
+        /// <param name="ipAddress">The IP address of the device.</param>
+        /// <returns>A task that represents the asynchronous operation. The task result contains the MAC address.</returns>
+        public async Task<string> GetMacAddressAsync(string ipAddress)
+        {
+            try
+            {
+                var processStartInfo = new ProcessStartInfo
+                {
+                    FileName = "arp",
+                    Arguments = $"-a {ipAddress}",
+                    RedirectStandardOutput = true,
+                    UseShellExecute = false,
+                    CreateNoWindow = true
+                };
+
+                using (var process = Process.Start(processStartInfo))
+                {
+                    if (process != null)
+                    {
+                        string output = await process.StandardOutput.ReadToEndAsync();
+                        process.WaitForExit();
+
+                        var match = Regex.Match(output, @"(\S+)\s+(\S+)\s+(\S+)");
+                        if (match.Success)
+                        {
+                            return match.Groups[3].Value;
+                        }
+                    }
+                }
+            }
+            catch
+            {
+
+            }
+            return string.Empty;
         }
     }
 }
