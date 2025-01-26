@@ -197,20 +197,20 @@ namespace Toolbox.Modules
                 {
                     if (process != null)
                     {
-                        string output = await process.StandardOutput.ReadToEndAsync();
-                        process.WaitForExit();
+                        var output = await process.StandardOutput.ReadToEndAsync();
+                        await process.WaitForExitAsync();
 
-                        var match = Regex.Match(output, @"(\S+)\s+(\S+)\s+(\S+)");
+                        var match = Regex.Match(output, $@"{Regex.Escape(ipAddress)}\s+([\da-fA-F:]+)");
                         if (match.Success)
                         {
-                            return match.Groups[3].Value;
+                            return match.Groups[1].Value;
                         }
                     }
                 }
             }
             catch
             {
-
+                // Handle exceptions if necessary
             }
             return string.Empty;
         }
