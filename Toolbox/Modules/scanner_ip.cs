@@ -170,7 +170,7 @@ namespace Toolbox.Modules
             }
             catch
             {
-                // Handle exceptions if necessary
+
             }
             return string.Empty;
         }
